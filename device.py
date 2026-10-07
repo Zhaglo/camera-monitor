@@ -15,7 +15,16 @@ def set_online(device):
     device['status'] = 'online'
 
 
-set_offline(device)
-set_online(device)
+def set_fps(device, fps):
+    if fps > 0:
+        device['fps'] = fps
+    else:
+        print('FPS должен быть больше нуля')
+
+
+set_fps(device, 15)
+print(device['fps'])
+set_fps(device, -5)
+print(device['fps'])
 
 print(f'Камера {device['device_id']}: {device['status']}, {device['resolution']}, {device['fps']} FPS')
