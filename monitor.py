@@ -18,12 +18,15 @@ if __name__ == '__main__':
         format='%(asctime)s %(levelname)s %(message)s',
     )
 
-    try:
-        state = get_device_state(url='http://127.0.0.1:8000/state')
-        print(state)
-    except HTTPError as error:
-        logging.error('Ошибка HTTP: %s', error.code)
-    except URLError as error:
-        logging.error('Устройство недоступно: %s', error.reason)
-    except TimeoutError:
-        logging.error('Время ожидания превышено')
+    device_urls = ['http://127.0.0.1:8001/state', 'http://127.0.0.1:8000/state']
+
+    for url in device_urls:
+        try:
+            state = get_device_state(url=url)
+            print(state)
+        except HTTPError as error:
+            logging.error('Ошибка HTTP: %s устройства %s', error.code, url)
+        except URLError as error:
+            logging.error('Устройство %s недоступно: %s', url, error.reason)
+        except TimeoutError:
+            logging.error('Время ожидания устройства %s превышено', url)
