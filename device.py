@@ -23,18 +23,19 @@ def set_fps(device, fps):
         return False
 
 
-result = set_fps(device, 30)
-if result:
-    print('FPS обновлен')
-else:
-    print('Некорректный FPS')
-print(result, device['fps'])
+if __name__ == '__main__':
+    result = set_fps(device, 30)
+    if result:
+        print('FPS обновлен')
+    else:
+        print('Некорректный FPS')
+    print(result, device['fps'])
 
-result = set_fps(device, -5)
-if result:
-    print('FPS обновлен')
-else:
-    print('Некорректный FPS')
-print(result, device['fps'])
+    result = set_fps(device, -5)
+    if result:
+        print('FPS обновлен')
+    else:
+        print('Некорректный FPS')
+    print(result, device['fps'])
 
-print(f'Камера {device['device_id']}: {device['status']}, {device['resolution']}, {device['fps']} FPS')
+    print(f'Камера {device['device_id']}: {device['status']}, {device['resolution']}, {device['fps']} FPS')
