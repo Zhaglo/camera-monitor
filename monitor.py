@@ -1,5 +1,7 @@
 import json
 import logging
+import time
+
 from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 
@@ -20,6 +22,7 @@ if __name__ == '__main__':
 
     device_urls = ['http://127.0.0.1:8001/state', 'http://127.0.0.1:8000/state']
 
+    started_at = time.perf_counter()
     for url in device_urls:
         try:
             state = get_device_state(url=url)
@@ -30,3 +33,5 @@ if __name__ == '__main__':
             logging.error('Устройство %s недоступно: %s', url, error.reason)
         except TimeoutError:
             logging.error('Время ожидания устройства %s превышено', url)
+    elapsed = time.perf_counter() - started_at
+    print(f'Опрос занял {elapsed:.2f}s')
