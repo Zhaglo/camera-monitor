@@ -12,3 +12,5 @@ except HTTPError as error:
     print(f'Ошибка HTTP: {error.code}')
 except URLError as error:
     print(f'Устройство недоступно: {error.reason}')
+except TimeoutError:
+    print('Время ожидания превышено')
