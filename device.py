@@ -1,5 +1,8 @@
+import os
+
+
 device = {
-    'device_id': 'entrance-01',
+    'device_id': os.getenv('DEVICE_ID', 'entrance-01'),
     'name': 'camera',
     'status': 'online',
     'resolution': '1920x1080',

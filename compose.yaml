@@ -3,12 +3,15 @@ services:
     build: .
     ports:
       - "127.0.0.1:8002:8000"
+    environment:
+      DEVICE_ID: "camera-fast"
 
   camera-slow:
     build: .
     ports:
       - "127.0.0.1:8003:8000"
     environment:
+      DEVICE_ID: "camera-slow"
       DEVICE_DELAY: "2"
 
   camera-failing:
@@ -16,4 +19,5 @@ services:
     ports:
       - "127.0.0.1:8004:8000"
     environment:
+      DEVICE_ID: "camera-failing"
       DEVICE_FAIL: "1"
