@@ -57,3 +57,19 @@ def test_poll_device_timeout():
 
     assert result['success'] is False
     assert result['error_type'] == 'timeout'
+
+
+def test_poll_device_request_error():
+    def handler(request):
+        raise httpx.ConnectError('Не удалось подключиться', request=request)
+
+    transport = httpx.MockTransport(handler)
+
+    async def run_check():
+        async with httpx.AsyncClient(transport=transport) as client:
+            return await poll_device(client, 'http://camera/state')
+
+    result = asyncio.run(run_check())
+
+    assert result['success'] is False
+    assert result['error_type'] == 'network'
