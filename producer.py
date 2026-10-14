@@ -1,6 +1,15 @@
+import json
+
 import asyncio
 
 import aio_pika
+
+
+job = {
+    'check_id': 'learning-001',
+    'urls': ['http://127.0.0.1:8002/state'],
+    'timeout': 3,
+}
 
 
 async def main():
@@ -13,7 +22,7 @@ async def main():
         queue = await channel.declare_queue('learning', durable=True)
 
         message = aio_pika.Message(
-            body='Привет из Python'.encode('utf-8'),
+            body=json.dumps(job).encode('utf-8'),
         )
 
         await channel.default_exchange.publish(

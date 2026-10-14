@@ -1,3 +1,5 @@
+import json
+
 import asyncio
 
 import aio_pika
@@ -15,7 +17,9 @@ async def main():
         async with queue.iterator() as messages:
             async for message in messages:
                 async with message.process():
-                    print('Получено:', message.body.decode('utf-8'))
+                    job = json.loads(message.body)
+                    print('ID задания:', job['check_id'])
+                    print('Список адресов:', job['urls'])
 
 
 if __name__ == '__main__':
