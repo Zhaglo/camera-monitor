@@ -21,3 +21,12 @@ services:
     environment:
       DEVICE_ID: "camera-failing"
       DEVICE_FAIL: "1"
+
+  rabbitmq:
+    image: rabbitmq:4-management
+    ports:
+      - "127.0.0.1:5672:5672"
+      - "127.0.0.1:15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: student
+      RABBITMQ_DEFAULT_PASS: learning
