@@ -27,6 +27,24 @@ def test_poll_device_success():
     }
 
 
+def test_poll_device_invalid_json():
+    def handler(request):
+        return httpx.Response(
+            200,
+            text='hello',
+        )
+
+    async def run_check():
+        transport = httpx.MockTransport(handler)
+        async with httpx.AsyncClient(transport=transport) as client:
+            return await poll_device(client, 'http://camera/state')
+
+    result = asyncio.run(run_check())
+
+    assert result['success'] is False
+    assert result['error_type'] == 'invalid_json'
+
+
 def test_poll_device_http_error():
     def handler(request):
         return httpx.Response(503)
