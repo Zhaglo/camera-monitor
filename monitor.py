@@ -60,6 +60,14 @@ async def poll_device(client, url):
             'error_type': 'network',
             'error': str(error),
         }
+    except json.JSONDecodeError as error:
+        logging.error('Устройство %s вернуло некорректный JSON: %s', url, error)
+        return {
+            'url': url,
+            'success': False,
+            'error_type': 'invalid_json',
+            'error': str(error),
+        }
 
 
 async def main(device_urls, timeout, output):
