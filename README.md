@@ -1,4 +1,4 @@
-# Camera Monitor
+# Camera Monitor [![Tests](https://github.com/Zhaglo/camera-monitor/actions/workflows/tests.yml/badge.svg)](https://github.com/Zhaglo/camera-monitor/actions/workflows/tests.yml)
 
 Учебный проект: эмулятор сетевой камеры и CLI-утилита для мониторинга нескольких устройств.
 
@@ -185,6 +185,12 @@ FPS должен быть целым числом больше нуля. Нол�
 ```bash
 python -m pytest -q
 ```
+
+Тесты автоматически запускаются в GitHub Actions на Ubuntu с Python 3.12
+для Pull Request в main и при обновлении main.
+
+Также установка зависимостей и все 10 тестов проверены вручную
+в Debian 13 с Python 3.13.
 
 Десять тестов проверяют:
 
