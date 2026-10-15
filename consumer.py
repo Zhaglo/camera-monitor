@@ -1,8 +1,8 @@
-import json
-
 import asyncio
 
 import aio_pika
+
+from schemas import CheckJob
 
 
 async def main():
@@ -17,9 +17,10 @@ async def main():
         async with queue.iterator() as messages:
             async for message in messages:
                 async with message.process():
-                    job = json.loads(message.body)
-                    print('ID задания:', job['check_id'])
-                    print('Список адресов:', job['urls'])
+                    job = CheckJob.model_validate_json(message.body)
+                    print('ID задания:', job.check_id)
+                    print('Список адресов:', job.urls)
+                    print('Время таймаута:', job.timeout)
 
 
 if __name__ == '__main__':
